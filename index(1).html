@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Seu Nome — Portfólio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;1,300&family=DM+Mono:wght@300&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: #0b0b0b;
+      color: #e2ddd8;
+      font-family: 'DM Mono', monospace;
+      font-weight: 300;
+      font-size: 13px;
+      line-height: 1.8;
+      letter-spacing: 0.02em;
+      padding: 64px 40px 80px;
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    /* ── Header ── */
+    header {
+      border-bottom: 1px solid #1d1d1d;
+      padding-bottom: 48px;
+      margin-bottom: 48px;
+    }
+
+    .name {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-weight: 300;
+      font-size: clamp(42px, 8vw, 80px);
+      line-height: 1;
+      letter-spacing: -0.02em;
+      margin-bottom: 24px;
+    }
+
+    .name em {
+      font-style: italic;
+      color: #4a7c59;
+    }
+
+    .bio {
+      max-width: 520px;
+      color: #5a5550;
+      font-size: 12px;
+      line-height: 2;
+    }
+
+    /* ── Contact strip ── */
+    .contact {
+      margin-top: 32px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 24px;
+      align-items: center;
+    }
+
+    .contact a {
+      text-decoration: none;
+      color: #5a5550;
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+
+    .contact a:hover { color: #4a7c59; }
+
+    .contact-sep {
+      width: 1px;
+      height: 12px;
+      background: #1d1d1d;
+    }
+
+    /* ── Grid ── */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2px;
+    }
+
+    /* ── Card ── */
+    .card {
+      background: #111111;
+      border: 1px solid #1a1a1a;
+    }
+
+    /* Image slot — substitua o .img-slot por <img src="..." /> */
+    .img-slot {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      background: #141414;
+      border-bottom: 1px solid #1a1a1a;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* Se você usar <img> dentro do card, ela preenche o slot */
+    .img-slot img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      filter: grayscale(20%);
+      transition: filter 0.4s, transform 0.4s;
+    }
+
+    .card:hover .img-slot img {
+      filter: grayscale(0%);
+      transform: scale(1.03);
+    }
+
+    .placeholder-label {
+      font-size: 10px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: #252525;
+    }
+
+    /* decorative rings no placeholder */
+    .img-slot::before,
+    .img-slot::after {
+      content: '';
+      position: absolute;
+      border-radius: 50%;
+      border: 1px solid #1e1e1e;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+    }
+    .img-slot::before { width: 60px; height: 60px; }
+    .img-slot::after  { width: 100px; height: 100px; opacity: 0.5; }
+
+    /* oculta os aneis quando ha imagem real */
+    .img-slot:has(img)::before,
+    .img-slot:has(img)::after { display: none; }
+    .img-slot:has(img) .placeholder-label { display: none; }
+
+    .card-body {
+      padding: 18px 20px 20px;
+    }
+
+    .card-title {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-weight: 300;
+      font-size: 20px;
+      margin-bottom: 6px;
+      line-height: 1.2;
+    }
+
+    .card-tag {
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #4a7c59;
+      margin-bottom: 10px;
+      display: block;
+    }
+
+    .card-desc {
+      font-size: 12px;
+      color: #5a5550;
+      line-height: 1.9;
+    }
+
+    /* ── Footer ── */
+    footer {
+      margin-top: 64px;
+      border-top: 1px solid #1d1d1d;
+      padding-top: 28px;
+      display: flex;
+      justify-content: space-between;
+      color: #313131;
+      font-size: 11px;
+      letter-spacing: 0.08em;
+    }
+
+    /* ── Mobile ── */
+    @media (max-width: 600px) {
+      body { padding: 40px 20px 60px; }
+      .grid { grid-template-columns: 1fr; }
+      footer { flex-direction: column; gap: 8px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════════
+       HEADER — edite seu nome e apresentação
+  ════════════════════════════════════════════ -->
+  <header>
+
+    <h1 class="name">Seu Nome<br/><em>Designer Gráfico</em></h1>
+
+    <p class="bio">
+      Escreva aqui uma apresentação curta sobre você — sua especialidade,
+      o que te move no design e o tipo de projeto com que mais trabalha.
+      Seja direto e autêntico.
+    </p>
+
+    <!-- ─── Contato: substitua os links pelos seus reais ─── -->
+    <nav class="contact">
+      <a href="mailto:seuemail@exemplo.com">seuemail@exemplo.com</a>
+      <span class="contact-sep"></span>
+      <a href="https://behance.net/seuperfil" target="_blank">Behance</a>
+      <span class="contact-sep"></span>
+      <a href="https://instagram.com/seuperfil" target="_blank">Instagram</a>
+      <span class="contact-sep"></span>
+      <a href="https://linkedin.com/in/seuperfil" target="_blank">LinkedIn</a>
+    </nav>
+
+  </header>
+
+
+  <!-- ═══════════════════════════════════════════
+       GRID DE PROJETOS
+       Para adicionar um projeto: duplique um .card
+       Para colocar sua imagem: descomente a linha <img>
+       e apague a linha <span class="placeholder-label">
+  ════════════════════════════════════════════ -->
+  <main class="grid">
+
+    <!-- Projeto 1 -->
+    <article class="card">
+      <div class="img-slot">
+        <!-- <img src="imagens/projeto1.jpg" alt="Nome do Projeto" /> -->
+        <span class="placeholder-label">Sua imagem</span>
+      </div>
+      <div class="card-body">
+        <span class="card-tag">Identidade Visual · 2024</span>
+        <h2 class="card-title">Nome do Projeto</h2>
+        <p class="card-desc">Descrição breve do projeto — contexto, desafio e resultado. Duas ou três frases são suficientes.</p>
+      </div>
+    </article>
+
+    <!-- Projeto 2 -->
+    <article class="card">
+      <div class="img-slot">
+        <!-- <img src="imagens/projeto2.jpg" alt="Nome do Projeto" /> -->
+        <span class="placeholder-label">Sua imagem</span>
+      </div>
+      <div class="card-body">
+        <span class="card-tag">Branding · 2024</span>
+        <h2 class="card-title">Nome do Projeto</h2>
+        <p class="card-desc">Descrição breve do projeto — contexto, desafio e resultado. Duas ou três frases são suficientes.</p>
+      </div>
+    </article>
+
+    <!-- Projeto 3 -->
+    <article class="card">
+      <div class="img-slot">
+        <!-- <img src="imagens/projeto3.jpg" alt="Nome do Projeto" /> -->
+        <span class="placeholder-label">Sua imagem</span>
+      </div>
+      <div class="card-body">
+        <span class="card-tag">Editorial · 2023</span>
+        <h2 class="card-title">Nome do Projeto</h2>
+        <p class="card-desc">Descrição breve do projeto — contexto, desafio e resultado. Duas ou três frases são suficientes.</p>
+      </div>
+    </article>
+
+    <!-- Projeto 4 -->
+    <article class="card">
+      <div class="img-slot">
+        <!-- <img src="imagens/projeto4.jpg" alt="Nome do Projeto" /> -->
+        <span class="placeholder-label">Sua imagem</span>
+      </div>
+      <div class="card-body">
+        <span class="card-tag">Tipografia · 2023</span>
+        <h2 class="card-title">Nome do Projeto</h2>
+        <p class="card-desc">Descrição breve do projeto — contexto, desafio e resultado. Duas ou três frases são suficientes.</p>
+      </div>
+    </article>
+
+    <!-- Projeto 5 -->
+    <article class="card">
+      <div class="img-slot">
+        <!-- <img src="imagens/projeto5.jpg" alt="Nome do Projeto" /> -->
+        <span class="placeholder-label">Sua imagem</span>
+      </div>
+      <div class="card-body">
+        <span class="card-tag">Motion · 2023</span>
+        <h2 class="card-title">Nome do Projeto</h2>
+        <p class="card-desc">Descrição breve do projeto — contexto, desafio e resultado. Duas ou três frases são suficientes.</p>
+      </div>
+    </article>
+
+    <!-- Projeto 6 -->
+    <article class="card">
+      <div class="img-slot">
+        <!-- <img src="imagens/projeto6.jpg" alt="Nome do Projeto" /> -->
+        <span class="placeholder-label">Sua imagem</span>
+      </div>
+      <div class="card-body">
+        <span class="card-tag">Ilustração · 2022</span>
+        <h2 class="card-title">Nome do Projeto</h2>
+        <p class="card-desc">Descrição breve do projeto — contexto, desafio e resultado. Duas ou três frases são suficientes.</p>
+      </div>
+    </article>
+
+  </main>
+
+
+  <footer>
+    <span>© 2025 Seu Nome</span>
+    <span>São Paulo, BR</span>
+  </footer>
+
+</body>
+</html>
